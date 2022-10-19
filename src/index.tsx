@@ -1,5 +1,15 @@
 import { render } from 'react-dom';
 import React, { useEffect, useState } from 'react';
+
+// const [dinamicPool, setDinamicPool] = useState([]);
+
+// const newPool = [...pool2021, ...pool2022];///////////////////llegara
+
+// trabajo es lo que mas llegue a usar mientras trabajaba
+// development lo que uso en desarrollo
+// lectura cosas pendientes que debo leer
+// mochila cosas que siempre me serviran tener a la mano mas alla de desarrollar
+// soporte es soporte
 const pool2021 = [
     {
         tag: 'trabajo',
@@ -146,72 +156,44 @@ const pool2022 = [
         },
     },
 ];
+function RenderColumns({ setNewPool }) {
+    // setNewPool(['a']);
+    const importantTitles = ['trabajo', 'development', 'lectura', 'soporte'];
 
-// trabajo es lo que mas llegue a usar mientras trabajaba
-// development lo que uso en desarrollo
-// lectura cosas pendientes que debo leer
-// mochila cosas que siempre me serviran tener a la mano mas alla de desarrollar
-// soporte es soporte
-const importantTitles = ['trabajo', 'development', 'lectura', 'soporte'];
+    const validateDate = ({ tag, url }) => !!tag && !!url;
+    const assignPriority = value => importantTitles.indexOf(value) + 1 || 9999;
 
-const validateDate = ({ tag, url }) => !!tag && !!url;
-const assignPriority = value => importantTitles.indexOf(value) + 1 || 9999;
-
-const newPool = [...pool2021, ...pool2022];
-
-const buildObject = newPool.reduce((acc, { tag, url }) => {
-    if (validateDate({ tag, url })) {
-        const valueContent = Object.values(url).toString();
-        const titleContent = Object.keys(url).toString();
-        const finalObject = {
-            tag: tag,
-            priorityTag: assignPriority(tag),
-            content: {
-                [titleContent]: valueContent,
-            },
-        };
-        acc.push(finalObject);
-    }
-    return acc;
-}, []);
-
-const sortAllBuildedObjects = buildObject.sort((a, b) => {
-    if (a.priorityTag < b.priorityTag) {
-        return -1;
-    }
-    if (a.priorityTag > b.priorityTag) {
-        return 1;
-    }
-    return 0;
-});
-
-const allPrioritiesFromObjects = sortAllBuildedObjects.reduce((prev, val) => {
-    if (!prev.includes(val.priorityTag)) {
-        prev.push(val.priorityTag);
-    }
-    return prev;
-}, []);
-
-const asignObjectToColumnByPriority = allPrioritiesFromObjects.map(priority => {
-    const elementFromPriority = sortAllBuildedObjects.reduce((prev, val) => {
-        if (priority === val.priorityTag) {
-            prev.push(val);
+    //
+    const buildObject = [...pool2021, ...pool2022].reduce((acc, { tag, url }) => {
+        if (validateDate({ tag, url })) {
+            const valueContent = Object.values(url).toString();
+            const titleContent = Object.keys(url).toString();
+            const finalObject = {
+                tag: tag,
+                priorityTag: assignPriority(tag),
+                content: {
+                    [titleContent]: valueContent,
+                },
+            };
+            acc.push(finalObject);
+        }
+        return acc;
+    }, []);
+    const sortAllBuildedObjects = buildObject.sort((a, b) => {
+        if (a.priorityTag < b.priorityTag) {
+            return -1;
+        }
+        if (a.priorityTag > b.priorityTag) {
+            return 1;
+        }
+        return 0;
+    });
+    const allPrioritiesFromObjects = sortAllBuildedObjects.reduce((prev, val) => {
+        if (!prev.includes(val.priorityTag)) {
+            prev.push(val.priorityTag);
         }
         return prev;
     }, []);
-
-    const column = elementFromPriority.map(({ tag, content }) => {
-        return (
-            <>
-                <div>{tag}</div>
-            </>
-        );
-    });
-    return column;
-});
-
-function RenderColumns(asignObjectToColumnByPriority) {
-    const [first, setfirst] = useState(null);
     const AsignObjectToColumnByPriority = allPrioritiesFromObjects.map(priority => {
         const elementFromPriority = sortAllBuildedObjects.reduce((prev, val) => {
             if (priority === val.priorityTag) {
@@ -256,15 +238,71 @@ function RenderColumns(asignObjectToColumnByPriority) {
         );
     });
 
-    // return <div>App</div>;
     return AsignObjectToColumnByPriority;
 }
 
-function App() {
-    useEffect(() => {
-        // console.log("holaa");
-    }, []);
+// agregar item
+const InputAddItem = () => {
+    const [newItem, setNewItem] = useState({
+        tag: 'tagExample',
+        url: {
+            nameExample: 'urlExample',
+        },
+    });
 
+    const handleChange = event => {
+        if (event.target.name === 'tag') {
+            setNewItem({ ...newItem, ['tag']: event.target.value });
+        }
+        if (event.target.name === 'name') {
+            const { url } = newItem;
+            const preValue = Object.values(url)[0];
+
+            setNewItem({ ...newItem, ['url']: { [event.target.value]: preValue } });
+        }
+        if (event.target.name === 'url') {
+            const { url } = newItem;
+            const key = Object.keys(url);
+            setNewItem({ ...newItem, ['url']: { [key]: event.target.value } });
+        }
+    };
+
+    return (
+        <form>
+            <label>
+                nombre <input type="text" id="name" name="name" onChange={handleChange} />
+            </label>
+            <label>
+                url <input type="text" id="url" name="url" onChange={handleChange} />
+            </label>
+            <label>
+                tag
+                <select name="tag" onChange={handleChange}>
+                    <option value="trabajo">trabajo</option>
+                    <option value="development">development</option>
+                    <option value="lectura">lectura</option>
+                    <option value="soporte">soporte</option>
+                    <option value="mochila">mochila</option>
+                </select>
+            </label>
+
+            <button onClick={() => {}}>Click me</button>
+            <input
+                type="submit"
+                value="Agregar"
+                onClick={event => {
+                    event.preventDefault();
+
+                    // setNewPool(oldArray => [...oldArray, newItem]);
+                }}
+            />
+        </form>
+    );
+};
+
+// main function
+function App() {
+    const [newPool, setNewPool] = useState(null);
     return (
         <div className="App">
             <header className="App-header">
@@ -283,16 +321,23 @@ function App() {
                                     justifyContent: 'space-around',
                                 }}>
                                 <div style={{ display: 'flex' }}>
-                                    <RenderColumns AsignObjectToColumnByPriority={asignObjectToColumnByPriority} />
+                                    <RenderColumns setNewPool={setNewPool} />
                                 </div>
                             </MyDataTable>
                         </div>
                     </div>
                 </div>
             </header>
+            <div>
+                <InputAddItem />
+            </div>
         </div>
     );
 }
-const MyDataTable = ({ children }) => <div>{children}</div>;
+
+// eslint-disable-next-line react/prop-types
+const MyDataTable = ({ children }) => {
+    return <div>{children}</div>;
+};
 
 render(<App />, document.getElementById('root'));
