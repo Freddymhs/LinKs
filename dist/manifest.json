@@ -1,0 +1,10 @@
+{
+    "short_name": "noTabs",
+    "name": "No Tabs",
+    "description": "No Tabs",
+    "version": "1.0",
+    "manifest_version": 3,
+    "action": {
+        "default_popup": "index.html"
+    }
+}
