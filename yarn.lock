@@ -2826,6 +2826,11 @@
     "locate-path" "^6.0.0"
     "path-exists" "^4.0.0"
 
+"firacode@^6.2.0":
+  "integrity" "sha512-t5R3aO2BmhRXnYtKXbImLVNsILuCIbJ/XlDzBufjpi3il8P/CVdpWco83Ud3r2Tl0gitAmyP4o1fbJ52ozV1jw=="
+  "resolved" "https://registry.npmjs.org/firacode/-/firacode-6.2.0.tgz"
+  "version" "6.2.0"
+
 "flat-cache@^3.0.4":
   "integrity" "sha512-dm9s5Pw7Jc0GvMYbshN6zchCA9RgQlzzEZX3vylR9IqFfS8XciblUXOKfW6SiuJ0e13eDYZoZV5wdrev7P3Nwg=="
   "resolved" "https://registry.npmjs.org/flat-cache/-/flat-cache-3.0.4.tgz"

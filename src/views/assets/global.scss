@@ -1,9 +1,9 @@
-$font-stack: Helvetica, sans-serif;
+// $font-stack: Helvetica, sans-serif;
 $primary-color: #333;
 
-$font-stack: "Koulen";
-$black-color: #000000;
-$white-color: #ffffff;
+$font-stack: "Fira code";
+$black-color: #ffffff;
+$white-color: #202124;
 $shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
 $white-borders: solid 2px #ffffff;
 $black-borders: solid #000000 2px;
@@ -17,7 +17,7 @@ $input-border: solid #000000 2px;
 .btn {
   // width: 200px;
   font-family: $font-stack;
-  font-weight: 0;
+  // font-weight: 400;
   color: $black-color;
   background-color: $white-color;
   padding: 5px 10px;
@@ -41,7 +41,7 @@ $input-border: solid #000000 2px;
 select {
   width: 200px;
   font-family: $font-stack;
-  font-weight: 0;
+  // font-weight: 400;
   color: $black-color;
   background-color: $white-color;
   padding: 5px 10px;
@@ -100,4 +100,8 @@ body {
 .containerForm {
   width: 800px;
   max-width: 800px;
+}
+
+.App {
+  background-color: #3f3f3f;
 }
