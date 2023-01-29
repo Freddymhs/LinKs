@@ -16,12 +16,17 @@ yarn build
 
 ## Usage
 
--   `yarn dev`: runs webpack with development environment.
--   `yarn build`: runs webpack with production environment.
--   `yarn lint`: checks typescript files lint issues in the `src/` folder.
+- `yarn dev`: runs webpack with development environment.
+- `yarn build`: runs webpack with production environment.
+- `yarn lint`: checks typescript files lint issues in the `src/` folder.
 
 <!-- todo -->
 
 falta input agregar item
 falta exportar como json
 falta cargar json
+
+<!-- prueba en local -->
+
+npm run dev
+npx serve -s dist

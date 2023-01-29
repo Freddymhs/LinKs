@@ -1,5 +1,6 @@
 import { render } from "react-dom";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import "./views/assets/global.scss";
 
 // falta
 // corrector ortografico
@@ -65,8 +66,11 @@ function Table({ initialPool, setNewPool, newPool }) {
       }, []);
 
       return (
-        <table border={1}>
-          <tr>
+        <table
+          //  border={1}
+          style={{ maxWidth: "10px" }} //si quito esto se deforma todoooo
+        >
+          <tr style={{ width: "10px" }}>
             {elementFromPriority.map((elemento, index) => {
               return (
                 <>
@@ -80,18 +84,7 @@ function Table({ initialPool, setNewPool, newPool }) {
                       href={Object.values(elemento.content)}
                       rel="noreferrer"
                     >
-                      <button
-                        style={{
-                          // display: 'block',
-                          width: "100%",
-                          borderRadius: "8px",
-                          backgroundColor: "#62EFFF",
-                          borderColor: "#323333",
-                          color: "#323333",
-                          cursor: "pointer",
-                          textAlign: "center",
-                        }}
-                      >
+                      <button className="btn">
                         {Object.keys(elemento.content)}
                       </button>
                     </a>
@@ -138,38 +131,55 @@ const InputAddItem = ({ initialPool, setNewPool }) => {
   };
 
   return (
-    <form>
-      <label>
-        nombre{" "}
-        <input type="text" id="name" name="name" onChange={handleChangeInput} />
-      </label>
-      <label>
-        url{" "}
-        <input type="text" id="url" name="url" onChange={handleChangeInput} />
-      </label>
-      <label>
-        tag
-        <select name="tag" onChange={handleChangeInput}>
-          <option value="trabajo">trabajo</option>
-          <option value="development">development</option>
-          <option value="lectura">lectura</option>
-          <option value="soporte">soporte</option>
-          <option value="mochila">mochila</option>
-        </select>
-      </label>
+    <div className="containerForm">
+      <form className="form">
+        <fieldset>
+          <legend>Nombre</legend>
+          <input
+            className="input"
+            type="text"
+            id="name"
+            name="name"
+            onChange={handleChangeInput}
+          />
+        </fieldset>
 
-      <button onClick={() => {}}>Click me</button>
-      <input
-        type="submit"
-        value="Agregar"
-        onClick={(event) => {
-          event.preventDefault();
-          createNewPool();
+        <fieldset>
+          <legend>Url</legend>
+          <input
+            className="input"
+            type="text"
+            id="url"
+            name="url"
+            onChange={handleChangeInput}
+          />
+        </fieldset>
 
-          // setNewPool(oldArray => [...oldArray, newItem]);
-        }}
-      />
-    </form>
+        <fieldset>
+          <legend>Tag</legend>
+          <select className="select" name="tag" onChange={handleChangeInput}>
+            <option value="trabajo">trabajo</option>
+            <option value="development">development</option>
+            <option value="lectura">lectura</option>
+            <option value="soporte">soporte</option>
+            <option value="mochila">mochila</option>
+          </select>
+        </fieldset>
+
+        <fieldset>
+          <input
+            className="btn"
+            type="submit"
+            value="Agregar"
+            onClick={(event) => {
+              event.preventDefault();
+              createNewPool();
+              // setNewPool(oldArray => [...oldArray, newItem]);
+            }}
+          />
+        </fieldset>
+      </form>
+    </div>
   );
 };
 
@@ -478,9 +488,37 @@ function App() {
       },
     },
   ];
+  const pool2023 = [
+    {
+      tag: "mochila",
+      url: {
+        "react-in-line css": "https://staxmanade.com/CssToReact/",
+      },
+    },
+    {
+      tag: "trabajo",
+      url: {
+        "psql array functions":
+          "https://www.postgresql.org/docs/9.1/functions-array.html",
+      },
+    },
+    {
+      tag: "mochila",
+      url: {
+        "klog local shipments": "http://local.teu.ai:3000/shipments",
+      },
+    },
+    {
+      tag: "development",
+      url: {
+        "copy file branch git":
+          "https://www.freecodecamp.org/news/git-checkout-file-from-another-branch/",
+      },
+    },
+  ];
 
   //
-  const [initialPool, _] = useState([...pool2021, ...pool2022]);
+  const [initialPool, _] = useState([...pool2021, ...pool2022, ...pool2023]);
   const [newPool, setNewPool] = useState([]);
 
   return (
@@ -489,11 +527,11 @@ function App() {
         <div>
           <div style={{ display: "flex", flexDirection: "row" }}>
             <div
-              style={{
-                width: "720px",
-                // backgroundColor: '#44EDFE',
-                color: "#323333",
-              }}
+            // style={{
+            //   // width: "1280px",
+            //   height: "100%",
+            //   color: "#323333",
+            // }}
             >
               <ParentStyle
                 style={{
@@ -514,6 +552,8 @@ function App() {
           </div>
         </div>
       </header>
+      <br />
+
       <div>
         <InputAddItem setNewPool={setNewPool} initialPool={initialPool} />
       </div>
