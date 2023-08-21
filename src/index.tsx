@@ -515,6 +515,63 @@ function App() {
           "https://www.freecodecamp.org/news/git-checkout-file-from-another-branch/",
       },
     },
+
+    {
+      tag: "trabajo",
+      url: {
+        "aws prod":
+          "https://us-east-1.console.aws.amazon.com/lambda/home?region=us-east-1#/functions/teuai-main-service-prod-graphqlTest?tab=monitoring",
+      },
+    },
+    {
+      tag: "trabajo",
+      url: {
+        "mail hog": "http://local.teu.ai:7025/",
+      },
+    },
+    {
+      tag: "development",
+      url: {
+        "historias dev": "https://github.com/orgs/teu-ai/projects/11/views/2",
+      },
+    },
+    {
+      tag: "mochila",
+      url: {
+        "klog design":
+          "https://www.chromatic.com/builds?appId=6464fad3498c3d83d9930171",
+      },
+    },
+
+    {
+      tag: "mochila",
+      url: {
+        "staging email testing":
+          "https://groups.google.com/u/0/a/klog.co/g/testing",
+      },
+    },
+
+    {
+      tag: "trabajo",
+      url: {
+        opportunities:
+          "https://www.notion.so/klog-tech/Opportunities-a70b188b1a3d4048a7a7dd72e0b02293",
+      },
+    },
+
+    {
+      tag: "trabajo",
+      url: {
+        "klog deployer": "https://deployer.klog.co/",
+      },
+    },
+
+    {
+      tag: "development",
+      url: {
+        migrate: "http://localhost:4000/local/migrate",
+      },
+    },
   ];
 
   //
