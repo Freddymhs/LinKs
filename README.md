@@ -1,32 +1,41 @@
-# proyecto original
+# Proyecto Original
 
-https://bestofreactjs.com/repo/yafkari-chrome-extension-react-boilerplate
+Enlace al repositorio en BestOfReactJS: https://bestofreactjs.com/repo/yafkari-chrome-extension-react-boilerplate
 
-# ejecutar en local
+## Ejecutar en Local
 
-```
-yarn add serve // 1 vez
-npx serve -s dist // solo al comienzo
-yarn dev // solo al comienzo
-```
+Requisitos previos:
 
-# crear dist(build) para chrome y probar en dev
+Asegúrate de tener Yarn instalado en tu sistema.
+
+Instalación:
+
+yarn add serve
+
+Ejecución:
+yarn server , yarn dev
+
+## Crear una versión de distribución (build) para Chrome y probar en entorno de desarrollo
 
 yarn build
 
-## Usage
+## Uso
 
-- `yarn dev`: runs webpack with development environment.
-- `yarn build`: runs webpack with production environment.
-- `yarn lint`: checks typescript files lint issues in the `src/` folder.
+- yarn dev: Inicia Webpack en modo de desarrollo.
+- yarn build: Ejecuta Webpack en modo de producción.
+- yarn lint: Comprueba problemas de estilo en archivos TypeScript en la carpeta src/.
 
-<!-- todo -->
+## Pendientes
 
-falta input agregar item
-falta exportar como json
-falta cargar json
+A continuación, se presentan algunas tareas pendientes para el proyecto:
 
-<!-- prueba en local -->
+- [ ] Agregar funcionalidad para insertar elementos.
+- [ ] Implementar la exportación como archivo JSON.
+- [ ] Agregar la capacidad de cargar datos desde un archivo JSON.
+
+## Prueba en Entorno Local
+
+Puedes probar el proyecto en tu entorno local utilizando los siguientes comandos:
 
 npm run dev
 npx serve -s dist

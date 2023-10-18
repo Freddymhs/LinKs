@@ -2,18 +2,11 @@ import { render } from "react-dom";
 import React, { useState } from "react";
 import "./views/assets/global.scss";
 
-// falta
-// corrector ortografico
-
-// const [dinamicPool, setDinamicPool] = useState([]);
-
-// const newPool = [...pool2021, ...pool2022];///////////////////llegara
-
-// trabajo es lo que mas llegue a usar mientras trabajaba
-// development lo que uso en desarrollo
-// lectura cosas pendientes que debo leer
-// mochila cosas que siempre me serviran tener a la mano mas alla de desarrollar
-// soporte es soporte
+// Trabajo: Herramientas y recursos utilizados en el trabajo.
+// Desarrollo: Herramientas y recursos utilizados para el desarrollo.
+// Lectura: Libros, artículos y otros materiales de lectura pendientes.
+// Mochila: Artículos esenciales que siempre se deben tener a mano, independientemente del desarrollo.
+// Soporte: Recursos de soporte para el desarrollo.
 
 function Table({ initialPool, setNewPool, newPool }) {
   const importantTitles = ["trabajo", "development", "lectura", "soporte"];
@@ -25,7 +18,6 @@ function Table({ initialPool, setNewPool, newPool }) {
 
   const pooltoUse = useInitialPool ? initialPool : newPool;
 
-  //
   const buildObject = pooltoUse.reduce((acc, { tag, url }) => {
     if (validateDate({ tag, url })) {
       const valueContent = Object.values(url).toString();
@@ -67,7 +59,6 @@ function Table({ initialPool, setNewPool, newPool }) {
 
       return (
         <table
-          //  border={1}
           style={{ maxWidth: "10px" }} //si quito esto se deforma todoooo
         >
           <tr style={{ width: "10px" }}>
@@ -84,7 +75,7 @@ function Table({ initialPool, setNewPool, newPool }) {
                       href={Object.values(elemento.content)}
                       rel="noreferrer"
                     >
-                      <button className="btn">
+                      <button className="tags">
                         {Object.keys(elemento.content)}
                       </button>
                     </a>
@@ -131,60 +122,67 @@ const InputAddItem = ({ initialPool, setNewPool }) => {
   };
 
   return (
-    <div className="containerForm">
-      <form className="form">
-        <fieldset>
-          <legend>Nombre</legend>
-          <input
-            className="input"
-            type="text"
-            id="name"
-            name="name"
-            onChange={handleChangeInput}
-          />
-        </fieldset>
+    <form>
+      <fieldset className="form-item">
+        <legend>nombre</legend>
+        <input
+          className="input"
+          type="text"
+          id="name"
+          name="name"
+          onChange={handleChangeInput}
+        />
+      </fieldset>
 
-        <fieldset>
-          <legend>Url</legend>
-          <input
-            className="input"
-            type="text"
-            id="url"
-            name="url"
-            onChange={handleChangeInput}
-          />
-        </fieldset>
+      <fieldset className="form-item">
+        <legend>url</legend>
+        <input
+          className="input"
+          type="text"
+          id="url"
+          name="url"
+          onChange={handleChangeInput}
+        />
+      </fieldset>
 
-        <fieldset>
-          <legend>Tag</legend>
-          <select className="select" name="tag" onChange={handleChangeInput}>
-            <option value="trabajo">trabajo</option>
-            <option value="development">development</option>
-            <option value="lectura">lectura</option>
-            <option value="soporte">soporte</option>
-            <option value="mochila">mochila</option>
-          </select>
-        </fieldset>
+      <fieldset className="form-item">
+        <legend>etiqueta</legend>
+        <select className="select" name="tag" onChange={handleChangeInput}>
+          <option value="trabajo">TRABAJO</option>
+          <option value="development">DEVELOPMENT</option>
+          <option value="lectura">LECTURA</option>
+          <option value="soporte">SOPORTE</option>
+          <option value="mochila">MOCHILA</option>
+        </select>
+      </fieldset>
 
-        <fieldset>
-          <input
-            className="btn"
-            type="submit"
-            value="Agregar"
-            onClick={(event) => {
-              event.preventDefault();
-              createNewPool();
-              // setNewPool(oldArray => [...oldArray, newItem]);
-            }}
-          />
-        </fieldset>
-      </form>
-    </div>
+      <fieldset className="form-item-50">
+        <legend>Add</legend>
+
+        <input
+          style={{
+            flex: 3,
+          }}
+          className="btnAdd"
+          type="submit"
+          value="=>"
+          onClick={(event) => {
+            event.preventDefault();
+            createNewPool();
+            // setNewPool(oldArray => [...oldArray, newItem]);
+          }}
+        ></input>
+      </fieldset>
+    </form>
   );
+};
+// descargar todos los items
+const downloadAllItemsAfterUpdates = () => {
+  return;
 };
 
 // main function
-function App() {
+const App = () => {
   const pool2021 = [
     {
       tag: "trabajo",
@@ -580,47 +578,29 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
-        <div>
-          <div style={{ display: "flex", flexDirection: "row" }}>
-            <div
-            // style={{
-            //   // width: "1280px",
-            //   height: "100%",
-            //   color: "#323333",
-            // }}
-            >
-              <ParentStyle
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-around",
-                }}
-              >
-                <div style={{ display: "flex" }}>
-                  <Table
-                    initialPool={initialPool}
-                    setNewPool={setNewPool}
-                    newPool={newPool}
-                  />
-                </div>
-              </ParentStyle>
-            </div>
-          </div>
-        </div>
-      </header>
+      <ParentStyle>
+        <Table
+          initialPool={initialPool}
+          setNewPool={setNewPool}
+          newPool={newPool}
+        />
+      </ParentStyle>
       <br />
-
-      <div>
-        <InputAddItem setNewPool={setNewPool} initialPool={initialPool} />
-      </div>
+      <InputAddItem setNewPool={setNewPool} initialPool={initialPool} />
     </div>
   );
-}
+};
 
-// eslint-disable-next-line react/prop-types
 const ParentStyle = ({ children }) => {
-  return <div>{children}</div>;
+  return (
+    <div
+      style={{
+        display: "flex",
+      }}
+    >
+      {children}
+    </div>
+  );
 };
 
 render(<App />, document.getElementById("root"));
