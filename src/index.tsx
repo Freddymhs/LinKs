@@ -7,6 +7,40 @@ import "./views/assets/global.scss";
 // Lectura: Libros, artículos y otros materiales de lectura pendientes.
 // Mochila: Artículos esenciales que siempre se deben tener a mano, independientemente del desarrollo.
 // Soporte: Recursos de soporte para el desarrollo.
+const Asdas = () => {
+  // const request = new Request("https://mymemory.translated.net/doc/spec.php", {
+  //   method: "POST",
+  //   mode: "no-cors",
+  //   headers: {
+  //     "Content-Type": "application/x-www-form-urlencoded",
+  //   },
+  //   body: `q=buenos días&langpair=es-en`,
+  // });
+
+  // fetch(request)
+  //   .then((response) => response.json())
+  //   .then((data) =>
+  //     console.log(
+  //       "acaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+  //       data.translations[0].translated_text
+  //     )
+  //   );
+  let API_URL = `https://api.mymemory.translated.net/get?q=${"HOLA MUNDO"}&langpair=${"es-ES"}|${"en-GB"}`;
+
+  const toInput = document.getElementById("translatedText"); // Replace with the actual element ID
+
+  function getDataFromAPI(url) {
+    return fetch(url)
+      .then((response) => response.json())
+      .catch((error) => console.error(error));
+  }
+
+  getDataFromAPI(API_URL).then((response) => {
+    console.log(response);
+    console.log(response.responseData.translatedText);
+  });
+};
+Asdas();
 
 function Table({ initialPool, setNewPool, newPool }) {
   const importantTitles = ["trabajo", "development", "lectura", "soporte"];
