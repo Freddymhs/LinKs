@@ -7,40 +7,80 @@ import "./views/assets/global.scss";
 // Lectura: Libros, artículos y otros materiales de lectura pendientes.
 // Mochila: Artículos esenciales que siempre se deben tener a mano, independientemente del desarrollo.
 // Soporte: Recursos de soporte para el desarrollo.
-const Asdas = () => {
-  // const request = new Request("https://mymemory.translated.net/doc/spec.php", {
-  //   method: "POST",
-  //   mode: "no-cors",
-  //   headers: {
-  //     "Content-Type": "application/x-www-form-urlencoded",
-  //   },
-  //   body: `q=buenos días&langpair=es-en`,
-  // });
-
-  // fetch(request)
-  //   .then((response) => response.json())
-  //   .then((data) =>
-  //     console.log(
-  //       "acaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
-  //       data.translations[0].translated_text
-  //     )
-  //   );
-  let API_URL = `https://api.mymemory.translated.net/get?q=${"HOLA MUNDO"}&langpair=${"es-ES"}|${"en-GB"}`;
-
-  const toInput = document.getElementById("translatedText"); // Replace with the actual element ID
-
-  function getDataFromAPI(url) {
-    return fetch(url)
-      .then((response) => response.json())
-      .catch((error) => console.error(error));
-  }
-
-  getDataFromAPI(API_URL).then((response) => {
-    console.log(response);
-    console.log(response.responseData.translatedText);
-  });
+const TranslateInput = ({
+  placeholder = "",
+  title = "",
+  inputValue,
+  setInputValue,
+}) => {
+  return (
+    <>
+      <p>{title}</p>
+      <input
+        type="text"
+        placeholder={placeholder}
+        onChange={(event) => {
+          setInputValue(event.target.value);
+        }}
+        value={inputValue}
+      />
+    </>
+  );
 };
-Asdas();
+const TranslateForm = () => {
+  const [titleValue, setTitleValue] = useState("");
+  const [descriptionValue, setDescriptionValue] = useState("");
+  const [translatedValue, setTranslatedValue] = useState(`
+  res: titulo
+  res: descirpcion
+  `);
+
+  return (
+    <>
+      <TranslateInput
+        title="Historia"
+        placeholder="EP 58 | US - 31"
+        inputValue={titleValue}
+        setInputValue={setTitleValue}
+      />
+      <TranslateInput
+        title="Descripcion"
+        placeholder="Como usuario de la plataforma quiero que se complete automáticamente el campo de Agencia de aduanas externar para evitar el imput manual "
+        inputValue={descriptionValue}
+        setInputValue={setDescriptionValue}
+      />
+      <button
+        onClick={async () => {
+          const textToTranslate = `${titleValue}kz${descriptionValue}`;
+
+          try {
+            const API_URL = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(
+              textToTranslate
+            )}&langpair=${"es-ES"}|${"en-GB"}`;
+            const translatedText = await fetch(API_URL)
+              .then((response) => response.json())
+              .then(
+                ({ responseData: { translatedText = "" } = {} } = {}) =>
+                  translatedText
+              );
+
+            setTranslatedValue(translatedText);
+          } catch (error) {
+            console.error(error);
+          }
+        }}
+      >
+        translate
+      </button>
+
+      <textarea
+        rows="4"
+        cols="50"
+        value={translatedValue.replace("kz", "\n")}
+      />
+    </>
+  );
+};
 
 function Table({ initialPool, setNewPool, newPool }) {
   const importantTitles = ["trabajo", "development", "lectura", "soporte"];
@@ -621,6 +661,8 @@ const App = () => {
       </ParentStyle>
       <br />
       <InputAddItem setNewPool={setNewPool} initialPool={initialPool} />
+      <br />
+      <TranslateForm />
     </div>
   );
 };
