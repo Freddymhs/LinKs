@@ -1,6 +1,9 @@
 import { render } from "react-dom";
 import React, { useState } from "react";
-import "./views/assets/global.scss";
+import "./global.scss";
+import palabra from "./helpers";
+import getFetchApiUrl from "./helpers";
+console.log({ palabra });
 
 // Trabajo: Herramientas y recursos utilizados en el trabajo.
 // Desarrollo: Herramientas y recursos utilizados para el desarrollo.
@@ -14,8 +17,8 @@ const TranslateInput = ({
   setInputValue,
 }) => {
   return (
-    <>
-      <p>{title}</p>
+    <fieldset className="form-item">
+      <legend>{title}</legend>
       <input
         type="text"
         placeholder={placeholder}
@@ -24,60 +27,95 @@ const TranslateInput = ({
         }}
         value={inputValue}
       />
-    </>
+    </fieldset>
   );
 };
 const TranslateForm = () => {
   const [titleValue, setTitleValue] = useState("");
   const [descriptionValue, setDescriptionValue] = useState("");
-  const [translatedValue, setTranslatedValue] = useState(`
-  res: titulo
-  res: descirpcion
-  `);
+  const [translatedValue, setTranslatedValue] = useState("");
 
   return (
     <>
-      <TranslateInput
-        title="Historia"
-        placeholder="EP 58 | US - 31"
-        inputValue={titleValue}
-        setInputValue={setTitleValue}
-      />
-      <TranslateInput
-        title="Descripcion"
-        placeholder="Como usuario de la plataforma quiero que se complete automáticamente el campo de Agencia de aduanas externar para evitar el imput manual "
-        inputValue={descriptionValue}
-        setInputValue={setDescriptionValue}
-      />
-      <button
-        onClick={async () => {
-          const textToTranslate = `${titleValue}kz${descriptionValue}`;
-
-          try {
-            const API_URL = `https://api.mymemory.translated.net/get?q=${encodeURIComponent(
-              textToTranslate
-            )}&langpair=${"es-ES"}|${"en-GB"}`;
-            const translatedText = await fetch(API_URL)
-              .then((response) => response.json())
-              .then(
-                ({ responseData: { translatedText = "" } = {} } = {}) =>
-                  translatedText
-              );
-
-            setTranslatedValue(translatedText);
-          } catch (error) {
-            console.error(error);
-          }
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
         }}
       >
-        translate
-      </button>
+        <div
+          style={{
+            width: 300,
+            flexGrow: 1,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <TranslateInput
+            title="Historia"
+            placeholder="EP 58 | US - 31..."
+            inputValue={titleValue}
+            setInputValue={setTitleValue}
+          />
+          <TranslateInput
+            title="Descripcion"
+            placeholder="Como usuario de la plataforma quiero...."
+            inputValue={descriptionValue}
+            setInputValue={setDescriptionValue}
+          />
+          <button
+            className="tags"
+            onClick={async () => {
+              const textToTranslate = `${titleValue}kz${descriptionValue}`;
+              try {
+                const translatedText = await getFetchApiUrl(textToTranslate)
+                  .then((response) => response.json())
+                  .then(
+                    ({ responseData: { translatedText = "" } = {} } = {}) =>
+                      translatedText
+                  );
+                //
+                const titleFormatted = titleValue
+                  .replace(/\s/g, "")
+                  .replace("|", "/");
+                const descriptionFormatted = descriptionValue.toLowerCase();
 
-      <textarea
-        rows="4"
-        cols="50"
-        value={translatedValue.replace("kz", "\n")}
-      />
+                const firstCommit = `feat(${titleFormatted}): ${descriptionFormatted}`;
+                const newBranch = `gco -b feat/${descriptionFormatted.replace(
+                  /\s/g,
+                  "-"
+                )}`;
+
+                setTranslatedValue(`${firstCommit}${"\n"}${newBranch}`);
+              } catch (error) {
+                console.error(error);
+              }
+            }}
+          >
+            {"=========>"}
+          </button>
+          {/* debo generar la rama */} gco -b feat/
+          {/* debo generar  la flag */}
+          {/* debo genrar nombre completo dle commit */}
+        </div>
+        <div
+          style={{
+            width: 300,
+            flexGrow: 1,
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <textarea
+            // onChange={translatedValue}
+            rows="6"
+            cols="70"
+            value={translatedValue}
+          />
+        </div>
+      </div>
     </>
   );
 };
@@ -255,7 +293,6 @@ const downloadAllItemsAfterUpdates = () => {
   return;
 };
 
-// main function
 const App = () => {
   const pool2021 = [
     {
