@@ -60,7 +60,7 @@ const TranslateForm = () => {
           />
           <TranslateInput
             title="Descripcion"
-            placeholder="Comoo usuario de la plataforma quiero...."
+            placeholder="Como usuario de la plataforma quiero...."
             inputValue={descriptionValue}
             setInputValue={setDescriptionValue}
           />
@@ -689,17 +689,96 @@ const App = () => {
 
   return (
     <div className="App">
-      <ParentStyle>
-        <Table
-          initialPool={initialPool}
-          setNewPool={setNewPool}
-          newPool={newPool}
-        />
-      </ParentStyle>
-      <br />
-      <InputAddItem setNewPool={setNewPool} initialPool={initialPool} />
-      <br />
-      <TranslateForm />
+      <body>
+        <div class="container">
+          <h2>Temas de Interés</h2>
+          <ul>
+            <li class="parent open">
+              <a href="#">Finanzas</a>
+              <ul>
+                <li class="child">
+                  <a href="#gestion-carteras">Gestión de Carteras(Profesor)</a>
+                </li>
+                <li class="child">
+                  <a href="#estrategias-inversion">
+                    Inversion y riesgos (Profesor)
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="parent open">
+              <a href="#">Personal</a>
+              <ul>
+                <li class="child">
+                  <a href="#ingles">Inglés (Active Recall)</a>
+                </li>
+                <li class="child">
+                  <a href="#habilidades-comunicacion">
+                    Comunicación (Active Recall)
+                  </a>
+                </li>
+                <li class="child">
+                  <a href="#preguntas-efectivas">
+                    Preguntas y Argumentos Efectivos (Socrático)
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="parent open">
+              <a href="#">Desarrollo de Software</a>
+              <ul>
+                <li class="child">
+                  <a href="#senior-fullstack">Fullstack (Active Recall)</a>
+                </li>
+                <li class="child">
+                  <a href="#innovacion-productos">
+                    Desarrollo de Productos (Profesor)
+                  </a>
+                </li>
+                <li class="child">
+                  <a href="#javascript">JavaScript (socratico)</a>
+                </li>
+                <li class="child">
+                  <a href="#sql">SQL (Ejercicios)</a>
+                </li>
+                <li class="child">
+                  <a href="#gestion-optimizacion-bd">
+                    Gestión y Optimización de Bases de Datos(Active Recall)
+                  </a>
+                </li>
+                <li class="child">
+                  <a href="#arquitectura-software">
+                    Arquitectura de Software (Profesor)
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="parent open">
+              <a href="#">PYME</a>
+              <ul>
+                <li class="child">
+                  <a href="#emprendimiento">Emprendimiento (Asesor)</a>
+                </li>
+                <li class="child">
+                  <a href="#creacion-startups">
+                    Creación de Startups y Escalamiento Empresarial(Profesor)
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="parent open">
+              <a href="#">Marketing</a>
+              <ul>
+                <li class="child">
+                  <a href="#estrategias-digital">
+                    Estrategias Marketing Digital (Asesor)
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </body>
     </div>
   );
 };
