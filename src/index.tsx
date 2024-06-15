@@ -60,7 +60,7 @@ const TranslateForm = () => {
           />
           <TranslateInput
             title="Descripcion"
-            placeholder="Como usuario de la plataforma quiero...."
+            placeholder="Comoo usuario de la plataforma quiero...."
             inputValue={descriptionValue}
             setInputValue={setDescriptionValue}
           />

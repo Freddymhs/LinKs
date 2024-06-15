@@ -1,19 +1,14 @@
 # Proyecto Original
 
-Enlace al repositorio en BestOfReactJS: https://bestofreactjs.com/repo/yafkari-chrome-extension-react-boilerplate
+[Enlace al repositorio en BestOfReactJS](https://bestofreactjs.com/repo/yafkari-chrome-extension-react-boilerplate)
 
 ## Ejecutar en Local
-
-Requisitos previos:
-
-Asegúrate de tener Yarn instalado en tu sistema.
-
-Instalación:
 
 yarn add serve
 
 Ejecución:
-yarn server , yarn dev
+`npm run serve`
+`npm run dev`
 
 ## Crear una versión de distribución (build) para Chrome y probar en entorno de desarrollo
 
@@ -37,5 +32,10 @@ A continuación, se presentan algunas tareas pendientes para el proyecto:
 
 Puedes probar el proyecto en tu entorno local utilizando los siguientes comandos:
 
-npm run dev
+
+npm run watch
+npx dev
+
+## probar el build
+npm run build
 npx serve -s dist

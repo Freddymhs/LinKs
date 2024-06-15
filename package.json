@@ -7,19 +7,19 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "olddev": "webpack --watch --config config/webpack.dev.js",
+    "watch": "webpack --watch --config config/webpack.dev.js",
     "dev": "webpack-dev-server --config config/webpack.dev.js",
     "build": "webpack --config config/webpack.prod.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint ./src --ext ts,tsx",
-    "server": "serve -s dist"
+    "serve": "serve -s dist"
   },
   "dependencies": {
     "@fontsource/koulen": "^4.5.1",
     "firacode": "^6.2.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "serve": "^14.2.1",
+    "serve": "^14.2.3",
     "webpack-dev-server": "^4.15.1"
   },
   "devDependencies": {
