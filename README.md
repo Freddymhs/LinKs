@@ -1,6 +1,5 @@
 # Proyecto Original
 
-[Enlace al repositorio en BestOfReactJS](https://bestofreactjs.com/repo/yafkari-chrome-extension-react-boilerplate)
 
 ## Ejecutar en Local
 
